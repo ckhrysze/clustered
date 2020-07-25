@@ -7,6 +7,8 @@ jobs:
     docker:
       - image: ckhrysze/amazonlinux2elixir
 
+    environment:
+      MIX_ENV: prod
     working_directory: ~/repo
     steps:
       - checkout
@@ -14,4 +16,5 @@ jobs:
       - run: mix local.hex --force
       - run: mix local.rebar
       - run: mix deps.get
-      - run: mix test
+      - run: mix release
+      - run: tar -zcf clustered.tar.gz _build/prod/rel/clustered
