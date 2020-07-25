@@ -17,4 +17,7 @@ jobs:
       - run: mix local.rebar
       - run: mix deps.get
       - run: mix release
-      - run: tar -zcf clustered.tar.gz _build/prod/rel/clustered
+      - run: tar -zcf clustered.tgz _build/prod/rel/clustered
+
+      - store_artifacts:
+          path: clustered.tgz
