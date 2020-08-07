@@ -3,11 +3,17 @@ defmodule Clustered.Router do
 
   require Logger
 
+  def port, do: Application.get_env(:clustered, :port)
+
   plug(:match)
   plug(:dispatch)
 
   get "/" do
     send_resp(conn, 200, "Success!")
+  end
+
+  get "/port" do
+    send_resp(conn, 200, "Running on: #{port()}")
   end
 
   match _ do

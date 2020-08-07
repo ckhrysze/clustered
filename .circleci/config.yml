@@ -1,9 +1,6 @@
-# Elixir CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-elixir/ for more details
 version: 2
 jobs:
-  build:
+  build_release:
     docker:
       - image: ckhrysze/amazonlinux2elixir
 
@@ -17,7 +14,7 @@ jobs:
       - run: mix local.rebar
       - run: mix deps.get
       - run: mix release
-      - run: tar -zcf clustered.tgz _build/prod/rel/clustered
+      - run: cp _build/prod/clustered-0.1.0.tar.gz clustered.tgz
 
       - store_artifacts:
           path: clustered.tgz
